@@ -1,0 +1,14 @@
+version: "3.8"
+
+services: 
+    api:
+        build:
+            context: ./
+            dockerfile: Dockerfile.dev
+        image: crudim
+        volumes: 
+            - ./:/usr/app
+        ports: 
+            - 5000:5000
+        restart: unless-stopped
+        container_name: crudcon
