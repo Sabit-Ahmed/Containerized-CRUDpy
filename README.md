@@ -1,7 +1,11 @@
 "# Containerized-CRUDpy " 
+
 This repository contains the python implementation codes of "Containerized Flask RestApi" with CRUD with different variations.
+
 #CRUDpy_jsonResponse contains the simple CRUD application with json response. Tested by Postman.
+
 #CRUDpy_templateRender contains the CRUD application which can renders templates.
+
 #Many more to go
 
 Impotant links:
