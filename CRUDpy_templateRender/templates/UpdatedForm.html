@@ -19,6 +19,7 @@
   <div class="table-users">
    <div class="header">Blogs</div>
 
+   <form action="/blogs/update_successfull" method="POST">
    <table cellspacing="0">
       <tr>
          <th>ID</th>
@@ -31,25 +32,30 @@
       {% else %}
          {% for i in blogs %}
       <tr>
-          <td>{{i.id}}</td>
-          <td>{{i.title}}</td>
-          <td>{{i.body}}</td>
+        <td>{{i.id}}
+          <input type="hidden" value="{{i.id}}" name="beforeId">
+        </td>
           <td>
-            <form action="/blogs/update" method="POST">
-              <button type="submit" name="up" value="{{i.id}}">Update</button>
-            </form>&nbsp;
-            
-            <form action="/blogs/delete" method="POST">
-              <button type="submit" name="del" value="{{i.id}}">Delete</button>
-            </form>
+            <input type="hidden" value="{{i.title}}" name="beforeTitle">
+            <input type="text" value="{{i.title}}" name="updatedTitle">
+        </td>
+          <td>
+            <input type="hidden" value="{{i.body}}" name="beforeBody">
+            <input type="text" value="{{i.body}}" name="updatedBody">
+        </td>
+          <td>
+              <input type="submit" value="Update"> &nbsp; <input type="reset" value="Reset">
           </td>
+          
+            
+        
       </tr>
+    
         {% endfor %}
       {% endif %}
    </table>
+  </form>
 </div>
-
-
 
 </body>
 

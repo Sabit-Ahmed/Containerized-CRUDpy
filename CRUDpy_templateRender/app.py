@@ -65,18 +65,18 @@ def update():
     id = request.form['up']
     q = Blogs.query.filter_by(id=id).first()
     blogs = [{'id':q.id, 'title':q.title, 'body':q.body}]
+    return render_template('UpdatedForm.html', blogs = blogs)
+
+@app.route('/blogs/update_successfull', methods=['POST'])
+def update_successfull():
+    id = request.form['beforeId']
+    q = Blogs.query.filter_by(id=id).first()
+    q.title = request.form['updatedTitle'] if request.form['updatedTitle'] else q.title
+    q.body = request.form['updatedBody'] if request.form['updatedBody'] else q.body
+    db.session.commit()
+    blogs = [{'id':q.id, 'title':q.title, 'body':q.body}]
+
     return render_template('Results.html', blogs = blogs)
-
-# @app.route('/blogs/update', methods=['POST'])
-# def update():
-#     id = request.form['up']
-#     q = Blogs.query.filter_by(id=id).first()
-#     q.title = request.form['title'] if request.form['title'] else q.title
-#     q.body = request.form['body'] if request.form['body'] else q.body
-#     db.session.commit()
-#     blogs = [{'id':q.id, 'title':q.title, 'body':q.body}]
-
-#     return render_template('Results.html', blogs = blogs)
 
 
 @app.route('/blogs/delete', methods=['POST']) 
