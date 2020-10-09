@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Review Page</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
+
+      <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+
+</head>
+
+<body>
+
+  <div class="table-users">
+   <div class="header">Blogs</div>
+
+   <table cellspacing="0">
+      <tr>
+         <th>ID</th>
+         <th>Title</th>
+         <th width="230">Description</th>
+         <th>Action</th>
+      </tr>
+      {% if not blogs %}
+        <h3>Blog is deleted!</h3>
+      {% else %}
+         {% for i in blogs %}
+      <tr>
+          <td>{{i.id}}</td>
+          <td>{{i.title}}</td>
+          <td>{{i.body}}</td>
+          <td>
+            <form action="/blogs/update" method="POST">
+              <button type="submit" name="up" value="{{i.id}}">Update</button>
+            </form>&nbsp;
+            
+            <form action="/blogs/delete" method="POST">
+              <button type="submit" name="del" value="{{i.id}}">Delete</button>
+            </form>
+          </td>
+      </tr>
+        {% endfor %}
+      {% endif %}
+   </table>
+</div>
+
+
+
+</body>
+
+</html>
