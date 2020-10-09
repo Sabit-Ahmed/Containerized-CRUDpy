@@ -1,0 +1,56 @@
+version: "3.8"
+
+services: 
+    api:
+        build:
+            context: ./api
+            dockerfile: Dockerfile.dev
+        image: crudim3
+        volumes: 
+            - ./api:/usr/app
+        ports:
+            - 7000:5000
+        links:
+            # network connection with these services
+            - db
+        depends_on:
+            - db
+        # env_file: ./api/db.conf 
+        environment: 
+            MYSQL_USER: root
+            MYSQL_PASSWORD: root
+            MYSQL_HOST: db
+            MYSQL_DATABASE: flask_db
+        restart: unless-stopped
+        container_name: crudcon3
+
+    db:
+        image: mysql:latest
+        ports:
+            - 3000:3306
+        volumes:
+            - ./db:/var/lib/mysql
+        container_name: mysql_con
+        environment: 
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_USER: root
+            MYSQL_PASSWORD: root
+            MYSQL_DATABASE: flask_db
+        restart: unless-stopped
+
+    phpmyadmin:
+        depends_on:
+            - db
+        image: phpmyadmin/phpmyadmin:latest
+        container_name: phpmyadmin_con
+        restart: unless-stopped
+        labels:
+            project: "flask"
+            day: "9 Oct 2020"
+        ports:
+            - "5010:80"
+        environment:
+            PMA_HOST: db
+            PMA_USER: root
+            PMA_PASSWORD: root
+            MYSQL_ROOT_PASSWORD: root

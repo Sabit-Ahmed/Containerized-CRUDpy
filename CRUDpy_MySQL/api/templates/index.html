@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CRUDpy-api</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    {% block head %}{% endblock %}
+</head>
+
+<body>
+<div class="content">
+    <h1 style="text-align: center">CRUD</h1>
+    <h2>Create Blog</h2>
+    <div class="form">
+        <form action="/blogs/search" method="POST">
+            <input type="text" name="str" required="required" id="str">
+            <input type="submit" value="Search">
+        </form>
+    </br>
+        <form action="/blogs" method="GET">
+            <input type="submit" value="See Existing Blogs">
+        </form>
+    </br>
+        <form action="/blogs" method="POST">
+            <input type="text" name="title" id="title" value="Title">
+            <input type="text" name="body" id="body" value="Description">
+            <input type="submit" value="Create">
+            <input type="reset" value="Clear">
+        </form>
+    </div>
+</div>
+{% block body %} {% endblock %}
+</body>
+</html>

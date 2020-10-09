@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Review Page</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
+
+      <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+
+</head>
+
+<body>
+
+  <div class="table-users">
+   <div class="header">Blogs</div>
+
+   <form action="/blogs/update_successfull" method="POST">
+   <table cellspacing="0">
+      <tr>
+         <th>ID</th>
+         <th>Title</th>
+         <th width="230">Description</th>
+         <th>Action</th>
+      </tr>
+      {% if not blogs %}
+        <h3>Blog is deleted!</h3>
+      {% else %}
+         {% for i in blogs %}
+      <tr>
+        <td>{{i.id}}
+          <input type="hidden" value="{{i.id}}" name="beforeId">
+        </td>
+          <td>
+            <input type="hidden" value="{{i.title}}" name="beforeTitle">
+            <input type="text" value="{{i.title}}" name="updatedTitle">
+        </td>
+          <td>
+            <input type="hidden" value="{{i.body}}" name="beforeBody">
+            <input type="text" value="{{i.body}}" name="updatedBody">
+        </td>
+          <td>
+              <input type="submit" value="Update"> &nbsp; <input type="reset" value="Reset">
+          </td>
+          
+            
+        
+      </tr>
+    
+        {% endfor %}
+      {% endif %}
+   </table>
+  </form>
+</div>
+
+</body>
+
+</html>
