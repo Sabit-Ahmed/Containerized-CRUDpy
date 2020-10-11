@@ -1,0 +1,39 @@
+version: "3.8"
+
+services: 
+    api:
+        build:
+            context: ./api
+            dockerfile: Dockerfile.dev
+        image: crudim
+        # volumes: 
+        #     - ./api:/usr/app
+        ports:
+            - 8000:5000
+        depends_on:
+            - db
+        env_file: ./api/api.env
+        restart: unless-stopped
+        container_name: crudcon
+
+    db:
+        image: mysql:latest
+        ports:
+            - 3001:3306
+        container_name: mysql_con
+        env_file: ./db/db.env
+        restart: unless-stopped
+
+    phpmyadmin:
+        depends_on:
+            - db
+        image: phpmyadmin/phpmyadmin:latest
+        container_name: phpmyadmin_con
+        restart: unless-stopped
+        labels:
+            project: "flask"
+            day: "9 Oct 2020"
+        ports:
+            - "5011:80"
+        environment:
+            PMA_HOST: db
