@@ -1,4 +1,4 @@
-"# Containerized-CRUDpy " 
+# Containerized-CRUDpy 
 
 This repository contains the python implementation codes of "Containerized Flask RestApi" with CRUD with different variations.
 
